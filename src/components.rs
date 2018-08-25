@@ -32,6 +32,22 @@ impl RenderImplementation<HtmlEngine, HtmlEngine> for Div {
     }
 }
 
+impl View<HtmlEngine, HtmlEngine> for Div {
+    type InputContext = DefaultContext;
+    type OutputContext = DefaultContext;
+    existential type Renderable: Renderable<HtmlEngine>;
+
+    fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
+        ctx
+    }
+
+    fn build<C>(self, children: Option<C>) -> Self::Renderable
+        where C: Renderable<HtmlEngine> + 'static
+    {
+        Node::new(self, children)
+    }
+}
+
 /** Span **/
 
 impl RenderImplementation<HtmlEngine, HtmlEngine> for Span {   

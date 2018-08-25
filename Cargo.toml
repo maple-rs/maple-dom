@@ -4,5 +4,5 @@ version = "0.1.0"
 authors = ["Andrey Tkachenko <andreytkachenko64@gmail.com>"]
 
 [dependencies]
-maple-core = {path = "../maple-core"}
-maple-stdweb = {path = "../maple-stdweb"}
+maple-core = {path = "../maple/maple-core"}
+maple-stdweb = {path = "../maple/maple-stdweb"}
