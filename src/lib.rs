@@ -1,14 +1,19 @@
-#![feature(never_type, existential_type)]
+#![feature(never_type, proc_macro_non_items)]
 
+#[macro_use]
 extern crate maple_core;
 extern crate maple_stdweb;
 
 mod components;
 mod canvas;
+mod panel;
+mod tabs;
 
 use std::cell::RefCell;
 pub use self::components::*;
 pub use self::canvas::*;
+pub use self::panel::*;
+pub use self::tabs::*;
 use maple_core::prelude::*;
 use std::collections::HashMap;
 

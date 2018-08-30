@@ -15,14 +15,14 @@ impl RenderImplementation<CanvasContextEngine, !> for Circle {
 impl View<CanvasContextEngine, !> for Circle {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    existential type Renderable: Renderable<CanvasContextEngine>;
+    type Renderable = Box<Renderable<CanvasContextEngine>>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
     }
 
     fn build<C: Renderable<!> + 'static>(self, children: Option<C>) -> Self::Renderable {
-        Node::new(self, children)
+        Box::new(Node::new(self, children))
     }
 }
 
@@ -41,7 +41,7 @@ impl RenderImplementation<CanvasContextEngine, !> for Rect {
 impl View<CanvasContextEngine, !> for Rect {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    existential type Renderable: Renderable<CanvasContextEngine>;
+    type Renderable = Box<Renderable<CanvasContextEngine>>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
@@ -50,6 +50,6 @@ impl View<CanvasContextEngine, !> for Rect {
     fn build<C>(self, children: Option<C>) -> Self::Renderable 
         where C: Renderable<!> + 'static
     {
-        Node::new(self, children)
+        Box::new(Node::new(self, children))
     }
 }

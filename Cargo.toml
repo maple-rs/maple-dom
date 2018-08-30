@@ -1,8 +1,13 @@
+cargo-features = ["edition"]
+
 [package]
 name = "maple-stdweb-dom"
 version = "0.1.0"
 authors = ["Andrey Tkachenko <andreytkachenko64@gmail.com>"]
+edition = "2018"
 
 [dependencies]
 maple-core = {path = "../maple/maple-core"}
 maple-stdweb = {path = "../maple/maple-stdweb"}
+maple-stdui = {path = "../maple/maple-stdui"}
+maple-macro = {path = "../maple/maple-macro"}

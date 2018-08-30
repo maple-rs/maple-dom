@@ -35,7 +35,7 @@ impl RenderImplementation<HtmlEngine, HtmlEngine> for Div {
 impl View<HtmlEngine, HtmlEngine> for Div {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    existential type Renderable: Renderable<HtmlEngine>;
+    type Renderable = Box<Renderable<HtmlEngine>>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
@@ -44,7 +44,7 @@ impl View<HtmlEngine, HtmlEngine> for Div {
     fn build<C>(self, children: Option<C>) -> Self::Renderable
         where C: Renderable<HtmlEngine> + 'static
     {
-        Node::new(self, children)
+        Box::new(Node::new(self, children))
     }
 }
 
@@ -63,7 +63,7 @@ impl RenderImplementation<HtmlEngine, HtmlEngine> for Span {
 impl View<HtmlEngine, HtmlEngine> for Span {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    existential type Renderable: Renderable<HtmlEngine>;
+    type Renderable= Box<Renderable<HtmlEngine>>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
@@ -72,7 +72,7 @@ impl View<HtmlEngine, HtmlEngine> for Span {
     fn build<C>(self, children: Option<C>) -> Self::Renderable
         where C: Renderable<HtmlEngine> + 'static
     {
-        Node::new(self, children)
+        Box::new(Node::new(self, children))
     }
 }
 
@@ -92,7 +92,7 @@ impl RenderImplementation<HtmlEngine, HtmlEngine> for Button {
 impl View<HtmlEngine, HtmlEngine> for Button {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    existential type Renderable: Renderable<HtmlEngine>;
+    type Renderable = Box<Renderable<HtmlEngine>>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
@@ -101,7 +101,7 @@ impl View<HtmlEngine, HtmlEngine> for Button {
     fn build<C>(self, children: Option<C>) -> Self::Renderable
         where C: Renderable<HtmlEngine> + 'static
     {
-        Node::new(self, children)
+        Box::new(Node::new(self, children))
     }
 }
 
@@ -125,7 +125,7 @@ impl RenderImplementation<HtmlEngine, CanvasContextEngine> for Canvas {
 impl View<HtmlEngine, CanvasContextEngine> for Canvas {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    existential type Renderable: Renderable<HtmlEngine>;
+    type Renderable = Box<Renderable<HtmlEngine>>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
@@ -134,6 +134,6 @@ impl View<HtmlEngine, CanvasContextEngine> for Canvas {
     fn build<C>(self, children: Option<C>) -> Self::Renderable
         where C: Renderable<CanvasContextEngine> + 'static
     {
-        Node::new(self, children)
+        Box::new(Node::new(self, children))
     }
 }
