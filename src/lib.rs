@@ -1,4 +1,4 @@
-#![feature(never_type, proc_macro_non_items)]
+#![feature(never_type, proc_macro_hygiene)]
 
 #[macro_use]
 extern crate maple_core;
