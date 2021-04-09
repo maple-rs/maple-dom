@@ -1,6 +1,7 @@
 use super::CanvasContextEngine;
 use maple_core::prelude::*;
 use maple_stdweb::*;
+use maple_macro::view;
 
 impl RenderImplementation<CanvasContextEngine, !> for Circle {
     fn render_impl<C: Renderable<!>>(&self, eng: &CanvasContextEngine, _children: &C) {
@@ -15,14 +16,14 @@ impl RenderImplementation<CanvasContextEngine, !> for Circle {
 impl View<CanvasContextEngine, !> for Circle {
     type InputContext = DefaultContext;
     type OutputContext = DefaultContext;
-    type Renderable = Box<Renderable<CanvasContextEngine>>;
+    type Renderable<C: Renderable<!> + 'static> = impl Renderable<CanvasContextEngine>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
     }
 
-    fn build<C: Renderable<!> + 'static>(self, children: Option<C>) -> Self::Renderable {
-        Box::new(Node::new(self, children))
+    fn build<C: Renderable<!> + 'static>(self, children: Option<C>) -> Self::Renderable<C> {
+        Node::new(self, children)
     }
 }
 
@@ -40,16 +41,16 @@ impl RenderImplementation<CanvasContextEngine, !> for Rect {
 
 impl View<CanvasContextEngine, !> for Rect {
     type InputContext = DefaultContext;
-    type OutputContext = DefaultContext;
-    type Renderable = Box<Renderable<CanvasContextEngine>>;
+    type OutputContext = DefaultContext; 
+    type Renderable<C: Renderable<!> + 'static> = impl Renderable<CanvasContextEngine>;
 
     fn receive_context(&mut self, ctx: Self::InputContext) -> Self::OutputContext {
         ctx
     }
 
-    fn build<C>(self, children: Option<C>) -> Self::Renderable 
+    fn build<C>(self, children: Option<C>) -> Self::Renderable<C>
         where C: Renderable<!> + 'static
     {
-        Box::new(Node::new(self, children))
+        Node::new(self, children)
     }
 }

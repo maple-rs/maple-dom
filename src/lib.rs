@@ -1,4 +1,6 @@
 #![feature(never_type, proc_macro_hygiene)]
+#![feature(generic_associated_types)]
+#![feature(min_type_alias_impl_trait)]
 
 #[macro_use]
 extern crate maple_core;
